@@ -18,5 +18,29 @@ pipeline {
                 }
             }
         }
+
+        stage('Package'){
+            steps {
+                script {
+                    sh 'echo "Now packaging the application into a commericiable unit..."'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'echo "Now Deploying the application to the server"'
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                script {
+                    sh 'echo "Now cleaning up the system after deploying software..."'
+                }
+            }
+        }
     }
 }
