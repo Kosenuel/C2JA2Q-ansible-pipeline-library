@@ -22,7 +22,7 @@ pipeline {
         stage('Package'){
             steps {
                 script {
-                    sh 'echo "Now packaging the application into a commericiable unit...'
+                    sh 'echo "Now packaging the application into a commericiable unit..."'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'echo "Now Deploying the application to the server'
+                    sh 'echo "Now Deploying the application to the server"'
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 script {
-                    sh 'Now cleaning up the system after deploying software...'
+                    sh 'echo "Now cleaning up the system after deploying software..."'
                 }
             }
         }
