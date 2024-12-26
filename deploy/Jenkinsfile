@@ -31,7 +31,6 @@ pipeline {
         stage('Prepare Dependencies'){
             steps {
                 sh '''
-                    sudo apt-get update
                     php -v
                     composer install
                     cp .env.example .env
