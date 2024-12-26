@@ -1,46 +1,22 @@
+// deploy/Jenkinsfile
 pipeline {
     agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                script {
-                    sh 'echo "Building Stage"'
-                }
-                
-            }
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    sh 'echo "This is the Testing Phase"'
-                }
-            }
-        }
-
-        stage('Package'){
-            steps {
-                script {
-                    sh 'echo "Now packaging the application into a commericiable unit..."'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    sh 'echo "Now Deploying the application to the server"'
-                }
-            }
-        }
-
-        stage('Cleanup') {
-            steps {
-                script {
-                    sh 'echo "Now cleaning up the system after deploying software..."'
-                }
-            }
-        }
+    
+    environment {
+        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
+    }
+    
+    parameters {
+        choice(
+            name: 'environment',
+            choices: ['dev', 'staging', 'prod'],
+            description: 'Select deployment environment'
+        )
+        
+        string(
+            name: 'branch',
+            defaultValue: 'main',
+            description: 'Branch to build'
+        )
     }
 }
