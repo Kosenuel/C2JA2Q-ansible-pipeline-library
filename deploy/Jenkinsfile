@@ -19,4 +19,39 @@ pipeline {
             description: 'Branch to build'
         )
     }
+
+    stages {
+        stage('Initial Cleanup'){
+            steps {
+                cleanWs()
+                checkout scm
+            }
+        }
+
+        stage('Prepare Dependencies'){
+            steps {
+                sh '''
+                    php -v
+                    composer install
+                    cp .env.example .env
+                    php artisan key:generate
+                    '''
+            }
+        }
+
+        stage('Execute Tests'){
+            steps {
+                sh '''
+                    ./vendor/bin/phpunit --log-junit tests/junit.xml
+                    phploc app/ --log-csv build/logs/phploc.csv
+                '''
+            }
+
+            post {
+                always {
+                    junit 'tests/junit.xml'
+                }
+            }
+        }
+    }
 }
