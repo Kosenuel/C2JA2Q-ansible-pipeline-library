@@ -1,0 +1,61 @@
+// deploy/Jenkinsfile
+pipeline {
+    agent any
+    
+    environment {
+        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
+    }
+    
+    parameters {
+        choice(
+            name: 'environment',
+            choices: ['dev', 'staging', 'prod'],
+            description: 'Select deployment environment'
+        )
+        
+        string(
+            name: 'branch',
+            defaultValue: 'main',
+            description: 'Branch to build'
+        )
+    }
+
+    stages {
+        stage('Initial Cleanup'){
+            steps {
+                cleanWs()
+                checkout scm
+            }
+        }
+
+        stage('Prepare Dependencies'){
+            steps {
+                sh '''
+                    php -v
+                    composer update
+                    echo "Composer Updated"
+                    composer install
+                    echo "Composer Dependencies Installed"
+                    cp .env.example .env
+                    php artisan key:generate
+                    '''
+
+            }
+        }
+
+        stage('Execute Tests'){
+            steps {
+                sh '''
+                    ./vendor/bin/phpunit --log-junit tests/junit.xml
+                    phploc app/ --log-csv build/logs/phploc.csv
+                '''
+            }
+
+            post {
+                always {
+                    junit 'tests/junit.xml'
+                }
+            }
+        }
+    }
+}
