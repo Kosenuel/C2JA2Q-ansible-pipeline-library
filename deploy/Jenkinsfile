@@ -33,11 +33,13 @@ pipeline {
                 sh '''
                     php -v
                     composer update
+                    echo "Composer Updated"
                     composer install
+                    echo "Composer Dependencies Installed"
                     cp .env.example .env
                     php artisan key:generate
                     '''
-                    
+
             }
         }
 
