@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh '''
                     php -v
-                    composer update
+                    composer --version
                     echo "Composer Updated"
                     composer install
                     echo "Composer Dependencies Installed"
