@@ -70,9 +70,8 @@ pipeline {
                 sh '''
                     set +x
                     echo "Running PHP Code Sniffer"
-                    which phpcs
+                    chmod +x $(which phploc)
                     phploc app/ --log-csv build/logs/phploc.csv
-                    which phploc
                     phploc --version
                     '''
             }
