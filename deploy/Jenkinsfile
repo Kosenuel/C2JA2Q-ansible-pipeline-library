@@ -48,7 +48,11 @@ pipeline {
         stage('Execute Tests'){
             steps {
                 sh '''
+                    sed -i "s/^APP_KEY=.*/APP_KEY=$(php artisan key:generate --show)/" .env
+                    cat .env
+                    echo "APP_KEY Updated"
                     echo $APP_KEY
+                    echo "Running Tests"
                     ./vendor/bin/phpunit --log-junit tests/junit.xml
                     phploc app/ --log-csv build/logs/phploc.csv
                 '''
