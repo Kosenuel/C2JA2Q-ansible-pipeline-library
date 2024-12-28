@@ -51,7 +51,7 @@ pipeline {
                     sed -i "s/^APP_KEY=.*/APP_KEY=$(php artisan key:generate --show)/" .env
                     cat .env
                     mkdir -p storage/framework/{sessions,cache,views}
-                    ls -la storage/
+                    ls -la storage/framework/
                     echo "APP_KEY Updated"
                     echo "This is the app key: $APP_KEY"
                     echo "Running Tests"
