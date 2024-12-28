@@ -68,7 +68,7 @@ pipeline {
         stage ('Code Analysis'){
             steps{
                 sh '''
-                    sudo phploc app/ --log-csv build/logs/phploc.csv
+                    /home/ubuntu/.config/composer/vendor/bin/phploc app/ --log-csv build/logs/phploc.csv
                     phploc --version
                     '''
             }
