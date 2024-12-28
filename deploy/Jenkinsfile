@@ -69,7 +69,7 @@ pipeline {
             steps{
                 sh '''
                     ls -la /home/ubuntu/.config/composer/vendor/bin/
-                    /home/ubuntu/.config/composer/vendor/bin/phploc app/ --log-csv build/logs/phploc.csv
+                    /usr/local/bin/phploc app/ --log-csv build/logs/phploc.csv
                     phploc --version
                     '''
             }
