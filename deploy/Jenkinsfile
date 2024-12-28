@@ -49,13 +49,10 @@ pipeline {
             steps {
                 sh '''
                     sed -i "s/^APP_KEY=.*/APP_KEY=$(php artisan key:generate --show)/" .env
-                    cat .env
                     mkdir -p storage/framework/sessions
                     mkdir -p storage/framework/cache
                     mkdir -p storage/framework/views
-                    ls -la storage/framework/
                     echo "APP_KEY Updated"
-                    echo "This is the app key: $APP_KEY"
                     echo "Running Tests"
                     ./vendor/bin/phpunit --log-junit tests/junit.xml
                 '''
