@@ -68,7 +68,6 @@ pipeline {
         stage ('Code Analysis'){
             steps{
                 sh '''
-                    chmod +x $(which phploc)
                     phploc app/ --log-csv build/logs/phploc.csv
                     phploc --version
                     '''
