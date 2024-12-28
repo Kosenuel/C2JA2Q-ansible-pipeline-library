@@ -48,6 +48,7 @@ pipeline {
         stage('Execute Tests'){
             steps {
                 sh '''
+                    echo $APP_KEY
                     ./vendor/bin/phpunit --log-junit tests/junit.xml
                     phploc app/ --log-csv build/logs/phploc.csv
                 '''
