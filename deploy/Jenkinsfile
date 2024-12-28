@@ -58,7 +58,6 @@ pipeline {
                     echo "This is the app key: $APP_KEY"
                     echo "Running Tests"
                     ./vendor/bin/phpunit --log-junit tests/junit.xml
-                    phploc app/ --log-csv build/logs/phploc.csv
                 '''
             }
 
