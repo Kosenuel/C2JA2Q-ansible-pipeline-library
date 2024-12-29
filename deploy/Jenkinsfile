@@ -212,10 +212,10 @@ pipeline {
 
         stage('SonarQube Analysis'){
             environment {
-                scannerHome = tool name: 'SonarQubeScanner', type: 'ToolLocation'
+                scannerHome = tool name: 'SonarQube Scanner', type: 'ToolLocation'
             }
             steps {
-                withSonarQubeEnv('SonarQube Scanner') {
+                withSonarQubeEnv('SonarQubeScanner') {
                     sh '''
                         $(scannerHome)/bin/sonar-scanner \
                         -Dsonar.projectKey=${JOB_NAME} \
