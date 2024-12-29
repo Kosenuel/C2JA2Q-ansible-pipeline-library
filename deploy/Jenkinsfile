@@ -210,6 +210,25 @@ pipeline {
     }
 }
 
+        stage('SonarQube Analysis'){
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh '''
+                        $(scannerHome)/bin/sonar-scanner \
+                        -Dsonar.projectKey=${JOB_NAME} \
+                        -Dsonar.sources=. \
+                        -Dsonar.php.tests.reportPath=tests/junit.xml \
+                        -Dsonar.php.coverage.reportPaths=coverage.xml
+                        '''
+                }
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                    }
+            }
+        }
         
     }
 }
