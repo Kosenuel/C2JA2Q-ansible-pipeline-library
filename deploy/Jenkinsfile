@@ -215,7 +215,7 @@ pipeline {
                 scannerHome = tool name: 'SonarQubeScanner', type: 'ToolLocation'
             }
             steps {
-                echo "SonarQube Scanner Path: $(scannerHome)" //Debugging
+                echo "SonarQube Scanner Path: $scannerHome" //Debugging
                 withSonarQubeEnv('sonarqube') {
                     sh '''
                         $(scannerHome)/bin/sonar-scanner \
