@@ -230,6 +230,30 @@ pipeline {
                     }
             }
         }
+
+        stage('Package Application'){
+            steps {
+                sh '''
+                    zip -r php-todo.zip .\
+                        -x "vendor/*" \
+                        -x ".git/*" \
+                        -x ".env" \
+                    '''
+                script {
+                    def server = Artifactory.server 'artifactory-server'
+                    def uploadSpec = """{
+                        "files": [{
+                            "pattern": "php-todo.zip",
+                            "target": "php-todo-local/${BUILD_NUMBER}/",
+                            "props": "BUILD_NUMBER=${BUILD_NUMBER}";BRANCH=${params.branch}"
+                            }]
+                            }"""
+
+                            server.upload spec: uploadSpec
+                }
+            }
+        }
         
+
     }
 }
