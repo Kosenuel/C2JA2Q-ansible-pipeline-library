@@ -219,7 +219,7 @@ pipeline {
                 withSonarQubeEnv('sonarqube') {
                     sh '''
                         $scannerHome/bin/sonar-scanner \
-                        -Dsonar.projectKey=${JOB_NAME} \
+                        -Dsonar.projectKey=php-todo \
                         -Dsonar.sources=. \
                         -Dsonar.php.tests.reportPath=tests/junit.xml \
                         -Dsonar.php.coverage.reportPaths=coverage.xml
