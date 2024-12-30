@@ -212,9 +212,10 @@ pipeline {
 
         stage('SonarQube Analysis'){
             environment {
-                scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                scannerHome = tool name: 'SonarQubeScanner', type: 'ToolLocation'
             }
             steps {
+                echo "SonarQube Scanner Path: $(scannerHome)" //Debugging
                 withSonarQubeEnv('sonarqube') {
                     sh '''
                         $(scannerHome)/bin/sonar-scanner \
