@@ -218,7 +218,7 @@ pipeline {
                 echo "SonarQube Scanner Path: $scannerHome" //Debugging
                 withSonarQubeEnv('sonarqube') {
                     sh '''
-                        $(scannerHome)/bin/sonar-scanner \
+                        $scannerHome/bin/sonar-scanner \
                         -Dsonar.projectKey=${JOB_NAME} \
                         -Dsonar.sources=. \
                         -Dsonar.php.tests.reportPath=tests/junit.xml \
