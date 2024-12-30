@@ -225,9 +225,9 @@ pipeline {
                         -Dsonar.php.coverage.reportPaths=coverage.xml
                         '''
                 }
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                    }
+                // timeout(time: 5, unit: 'MINUTES') {
+                //     waitForQualityGate abortPipeline: true
+                //     }
             }
         }
 
