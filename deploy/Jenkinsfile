@@ -6,7 +6,7 @@ pipeline {
         ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
     }
     
-    params {
+    parameters {
         choice(
             name: 'environment',
             choices: ['dev', 'staging', 'prod'],
@@ -245,7 +245,7 @@ pipeline {
                         "files": [{
                             "pattern": "php-todo.zip",
                             "target": "php-todo-local/${BUILD_NUMBER}/",
-                            "props": "BUILD_NUMBER=${BUILD_NUMBER}";BRANCH=${params.branch}"
+                            "props": "BUILD_NUMBER=${BUILD_NUMBER}";BRANCH=${parameters.branch}"
                             }]
                             }"""
 
