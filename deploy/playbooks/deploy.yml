@@ -1,0 +1,16 @@
+---
+- hosts: todo
+  vars:
+    artifact_url: "https://artifactorykosenuel.jfrog.io/artifactory/php-todo-local/{{ artifact_version }}/php-todo.zip"
+    
+  tasks:
+    - name: Download artifact
+    get_url:
+      url: "{{ artifact_url }}"
+      dest: "/tmp/php-todo.zip"
+
+    - name: Unzip artifact
+    unarchive:
+      src: "/tmp/php-todo.zip"
+      dest: "/var/www/html"
+      remote_src: yes
