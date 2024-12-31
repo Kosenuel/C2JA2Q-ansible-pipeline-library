@@ -6,7 +6,7 @@ pipeline {
         ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
     }
     
-    parameters {
+    params {
         choice(
             name: 'environment',
             choices: ['dev', 'staging', 'prod'],
