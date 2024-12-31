@@ -1,0 +1,17 @@
+all:
+    children:
+        tooling:
+            hosts:
+                # tooling-server-1.example.com
+        todo:
+            hosts:
+                35.177.30.156:
+        nginx:
+            hosts:
+                172.31.29.199:
+        db:
+            vars:
+                ansible_user: ec2-user
+                ansible_python_interpreter: /usr/bin/python
+            hosts:
+                # db-server-2.example.com
