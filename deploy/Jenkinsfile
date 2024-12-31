@@ -259,7 +259,8 @@ pipeline {
     steps {
         script {
             def playbook = "${WORKSPACE}/deploy/playbooks/deploy.yml"
-            def inventory = "${WORKSPACE}/deploy/inventory/${params.environment}"
+            def inventory = "${WORKSPACE}/deploy/inventory/${params.environment}.ini"
+
             
             ansiblePlaybook(
                 playbook: playbook,
