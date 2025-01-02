@@ -2,7 +2,7 @@
 - hosts: todo
   become: yes
   vars:
-    artifact_url: "https://artifactorykosenuel.jfrog.io/artifactory/php-todo-local/{{ artifact_version }}"/php-todo.zip"
+    artifact_url: "https://artifactorykosenuel.jfrog.io/artifactory/php-todo-local/{{ artifact_version }}/php-todo.zip"
     
   tasks:
     - name: Download artifact
