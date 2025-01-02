@@ -266,7 +266,7 @@ pipeline {
                 playbook: playbook,
                 inventory: inventory,
                 extras: '-e "artifact_version=${BUILD_NUMBER}"',
-                colorized: true
+                colorized: true 
             )
         }
     }
