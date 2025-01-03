@@ -5,10 +5,12 @@
     artifact_url: "https://artifactorykosenuel.jfrog.io/artifactory/php-todo-local/{{ artifact_version }}/php-todo.zip"
     
   tasks:
-    - name: Download artifact
+    - name: Download artifact from Artifactory
       get_url:
         url: "{{ artifact_url }}" 
         dest: "/tmp/php-todo.zip"
+         headers:
+           Authorization: "Basic {{ lookup('pipe', 'echo -n jobaho5611@vidwobox.com:Genealogy55& | base64') }}"
 
     - name: Unzip artifact
       unarchive:
