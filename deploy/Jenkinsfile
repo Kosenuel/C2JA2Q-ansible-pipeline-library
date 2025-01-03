@@ -260,7 +260,7 @@ pipeline {
             script {
                 def playbook = "${WORKSPACE}/deploy/playbooks/deploy.yml"
                 def inventory = "${WORKSPACE}/deploy/inventory/${params.environment}.yml"
-                def sshKey = "${env.HOME}/.ssh/Buka-key.pem"
+                def sshKey = "${env.HOME}/usr/bin/Buka-key.pem"
 
                 ansiblePlaybook(
                 playbook: playbook,
