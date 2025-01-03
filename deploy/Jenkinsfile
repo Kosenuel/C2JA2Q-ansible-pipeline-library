@@ -255,35 +255,36 @@ pipeline {
             }
         }
 
-    stage('Set Up SSH Key'){
-        steps {
-            script {
-                //Load the SSH private key from Jenkins credentials
-                // and save it temporarily for Ansible's use
-                writeFile file: ANSIBLE_PRIVATE_KEY_FILE, text: credentials('ansible-ssh-key')
-                sh "chmod 600 ${ANSIBLE_PRIVATE_KEY_FILE}"
+        stage('Set Up SSH Key') {
+            steps {
+                script {
+                    // Load the SSH private key from Jenkins credentials
+                    // and save it temporarily for Ansible to use
+                    writeFile file: ANSIBLE_PRIVATE_KEY_FILE, text: credentials('ansible-ssh-key')
+                    sh "chmod 600 ${ANSIBLE_PRIVATE_KEY_FILE}"
+                }
             }
         }
-    }
-        stage('Deploy to Environment') {
-    steps {
-        script {
-            def playbook = "${WORKSPACE}/deploy/playbooks/deploy.yml"
-            def inventory = "${WORKSPACE}/deploy/inventory/${params.environment}.yml"
-            // export the ssh key for ansible to use
-            sh """
-                export ANSIBLE_PRIVATE_KEY_FILE="${ANSIBLE_PRIVATE_KEY_FILE}"
-            """
 
-            ansiblePlaybook(
-                playbook: playbook,
-                inventory: inventory,
-                extras: '-e "artifact_version=${BUILD_NUMBER}"',
-                colorized: true 
-            )
+        stage('Deploy to Environment') {
+            steps {
+                script {
+                    def playbook = "${WORKSPACE}/deploy/playbooks/deploy.yml"
+                    def inventory = "${WORKSPACE}/deploy/inventory/${params.environment}.yml"
+                    // export the ssh key for ansible to use
+                    sh """
+                        export ANSIBLE_PRIVATE_KEY_FILE="${ANSIBLE_PRIVATE_KEY_FILE}"
+                    """
+
+                    ansiblePlaybook(
+                        playbook: playbook,
+                        inventory: inventory,
+                        extras: '-e "artifact_version=${BUILD_NUMBER}"',
+                        colorized: true 
+                    )
+                }
+            }
         }
-    }
-}
         
 
     }
