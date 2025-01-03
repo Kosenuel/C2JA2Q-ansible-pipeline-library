@@ -10,7 +10,7 @@
         url: "{{ artifact_url }}" 
         dest: "/tmp/php-todo.zip"
         headers:
-          Authorization: "Basic {{ lookup('pipe', 'echo -n jobaho5611@vidwobox.com:Genealogy55& | base64') }}"
+          Authorization: "Basic {{ 'jobaho5611@vidwobox.com:Genealogy55&' }}"
 
     - name: Unzip artifact
       unarchive:
