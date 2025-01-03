@@ -284,5 +284,22 @@ pipeline {
         
 
         }
+
+        stage('Verify Deployment'){
+            steps{
+                script{
+                    //normally this is where the url of the target environment would be placed. 
+                    def verifyUrl = "http://35.177.30.156"
+                    sh "curl -I ${verifyUrl}"
+
+                }
+            }
+        }
+
+        post {
+            always{
+                cleanWs()
+            }
+        }
     }
 }
