@@ -254,6 +254,15 @@ pipeline {
                 }
             }
         }
+        
+        stage('Check User'){
+            steps{
+                script{
+                    //Output the current user 
+                    sh 'echo "Jenkins is running as user: $(whoami)"'
+                }
+            }
+        }
 
         stage('Deploy to Environment') {
             steps {
