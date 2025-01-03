@@ -266,23 +266,25 @@ pipeline {
 
         stage('Deploy to Environment') {
             steps {
-            script {
-                def playbook = "${WORKSPACE}/deploy/playbooks/deploy.yml"
-                def inventory = "${WORKSPACE}/deploy/inventory/${params.environment}.yml"
-                def sshKey = "${env.HOME}/usr/bin/Buka-key.pem"
+                script {
+                    def playbook = "${WORKSPACE}/deploy/playbooks/deploy.yml"
+                    def inventory = "${WORKSPACE}/deploy/inventory/${params.environment}.yml"
+                    def sshKey = "${env.HOME}/usr/bin/Buka-key.pem"
 
-                ansiblePlaybook(
-                playbook: playbook,
-                inventory: inventory,
-                extras: '-e "artifact_version=${BUILD_NUMBER}"',
-                colorized: true,
-                credentialsId: 'ansible-ssh-key',
-                sshKeyFile: sshKey
-                )
+                    sshagent(['ansible-ssh-key']){
+                        ansiblePlaybook(
+                            playbook: playbook,
+                            inventory: inventory,
+                            extras: '-e "artifact_version=${BUILD_NUMBER}"',
+                            colorized: true,
+                            sshKeyFile: sshKey
+                        )
+                    
+                    }
+                }
             }
-            }
-        }
         
 
+        }
     }
 }
