@@ -9,8 +9,11 @@
       get_url:
         url: "{{ artifact_url }}" 
         dest: "/tmp/php-todo.zip"
-        headers:
-          Authorization: "Basic {{ 'jobaho5611@vidwobox.com:Genealogy55&' }}"
+        url_username: jobaho5611@vidwobox.com
+        url_password: "Genealogy55&"
+        force: yes
+        mode: '0644'
+        validate_certs: no
 
     - name: Unzip artifact
       unarchive:
